@@ -6,11 +6,10 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "vaixells")
 public class Vaixell implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
 	private int matricula;
 	private String nom;
 	private List<Tripulant> tripulacio;
@@ -20,14 +19,6 @@ public class Vaixell implements Serializable {
 		super();
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getMatricula() {
 		return matricula;
 	}
