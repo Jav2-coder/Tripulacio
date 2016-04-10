@@ -1,27 +1,37 @@
 package net.javierjimenez.Tripulacio;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
- * Hello world!
+ * 
+ * @author Surrui
  *
  */
-public class App
-{
-    public static void main( String[] args )
-    {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Tripulants");
-        EntityManager e = emf.createEntityManager();
+public class App extends Application {
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("/tripulacio.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("/tripulacio.css").toExternalForm());
+			primaryStage.setTitle("Generació de vaixells amb tripulació");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			//Class.forName("com.mysql.jdbc.Driver");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-        
-
-        /*e.getTransaction().begin();
-        e.persist();
-        e.getTransaction().commit();
-
-        e.close();*/
-
-    }
+	/**
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
