@@ -10,9 +10,16 @@ import javax.persistence.*;
 public class Vaixell implements Serializable {
 
 	@Id
+	@Column(name = "Matrícula")
 	private int matricula;
+	
+	@Column(name = "Nom")
 	private String nom;
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_vaixell")
 	private List<Tripulant> tripulacio;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Vaixell() {
