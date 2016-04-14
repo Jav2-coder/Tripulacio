@@ -39,10 +39,18 @@ public class TripulacioController implements Initializable {
 
 	public void generarVaixells(ActionEvent event) {
 
-		e.getTransaction().begin();
-		// e.persist(alumne);
-		e.getTransaction().commit();
-
+		Dades d = new Dades();
+		
+		int i = 0;
+		
+		while(i < 10){
+			
+			e.getTransaction().begin();
+			e.persist(d.persistirDatos());
+			e.getTransaction().commit();
+			i++;
+		}
+		
 		e.close();
 
 	}
