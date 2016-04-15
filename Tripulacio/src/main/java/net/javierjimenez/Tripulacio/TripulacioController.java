@@ -31,15 +31,15 @@ public class TripulacioController implements Initializable {
 	private ComboBox<String> llistaVaixells = new ComboBox<>();
 
 	private EntityManager e;
-	
+
 	private List<Vaixell> vaixells = new ArrayList<Vaixell>();
-	
+
 	private List<Tripulant> tripulants;
-	
+
 	private static final int MIN_TRIPULACIO = 3;
-	
+
 	private static final int MAX_TRIPULACIO = 10;
-	
+
 	private Random rnd = new Random();
 
 	@Override
@@ -53,47 +53,47 @@ public class TripulacioController implements Initializable {
 	public void generarVaixells(ActionEvent event) {
 
 		Dades d = new Dades();
-		
+
 		e.getTransaction().begin();
-		
+
 		int i = 0;
 		int j = 0;
-		
-		while (j < 2){
-			
+
+		while (j < 100) {
+
 			Vaixell v = new Vaixell();
 			vaixells.add(v);
-			System.out.println("Total " + j);
-			e.persist(v);
 			j++;
 		}
-		
-		while(i < vaixells.size()){
-			
+
+		while (i < vaixells.size()) {
+
 			tripulants = new ArrayList<Tripulant>();
-			
+
 			int rndTripulacio = rnd.nextInt(MAX_TRIPULACIO - MIN_TRIPULACIO) + MIN_TRIPULACIO;
-			
+
 			d.persistirVaixell(vaixells.get(i));
 			
-			for(int k = 0; k < rndTripulacio;){
-				
-				System.out.println("Posicio " +  k);
-				
-				Tripulant t = new Tripulant();
-				d.persistirTripulant(t, vaixells.get(i).getMatricula());
-				
-				if(e.find(Tripulant.class, t.getDni()) == null) {
-					e.persist(t);
-					k++;
-					tripulants.add(t);
+			if (e.find(Vaixell.class, vaixells.get(i).getMatricula()) == null) {
+
+				for (int k = 0; k < rndTripulacio;) {
+
+					Tripulant t = new Tripulant();
+					d.persistirTripulant(t, vaixells.get(i).getMatricula());
+
+					if (e.find(Tripulant.class, t.getDni()) == null) {
+						e.persist(t);
+						k++;
+						tripulants.add(t);
+					}
 				}
+
+				vaixells.get(i).setTripulacio(tripulants);
+
+				e.persist(vaixells.get(i));
+				i++;
+				System.out.println("Vaixell " + i);
 			}
-			
-			vaixells.get(i).setTripulacio(tripulants);
-			
-			e.persist(vaixells.get(i));
-			i++;
 		}
 		
 		e.getTransaction().commit();
