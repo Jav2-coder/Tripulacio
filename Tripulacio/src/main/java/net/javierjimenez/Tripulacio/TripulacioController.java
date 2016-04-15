@@ -1,6 +1,9 @@
 package net.javierjimenez.Tripulacio;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javax.persistence.EntityManager;
@@ -28,6 +31,16 @@ public class TripulacioController implements Initializable {
 	private ComboBox<String> llistaVaixells = new ComboBox<>();
 
 	private EntityManager e;
+	
+	private List<Vaixell> vaixells = new ArrayList<Vaixell>();
+	
+	private List<Tripulant> tripulants;
+	
+	private static final int MIN_TRIPULACIO = 3;
+	
+	private static final int MAX_TRIPULACIO = 10;
+	
+	private Random rnd = new Random();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -41,16 +54,49 @@ public class TripulacioController implements Initializable {
 
 		Dades d = new Dades();
 		
-		int i = 0;
+		e.getTransaction().begin();
 		
-		while(i < 10){
+		int i = 0;
+		int j = 0;
+		
+		while (j < 2){
 			
-			e.getTransaction().begin();
-			e.persist(d.persistirDatos());
-			e.getTransaction().commit();
+			Vaixell v = new Vaixell();
+			vaixells.add(v);
+			System.out.println("Total " + j);
+			e.persist(v);
+			j++;
+		}
+		
+		while(i < vaixells.size()){
+			
+			tripulants = new ArrayList<Tripulant>();
+			
+			int rndTripulacio = rnd.nextInt(MAX_TRIPULACIO - MIN_TRIPULACIO) + MIN_TRIPULACIO;
+			
+			d.persistirVaixell(vaixells.get(i));
+			
+			for(int k = 0; k < rndTripulacio;){
+				
+				System.out.println("Posicio " +  k);
+				
+				Tripulant t = new Tripulant();
+				d.persistirTripulant(t, vaixells.get(i).getMatricula());
+				
+				if(e.find(Tripulant.class, t.getDni()) == null) {
+					e.persist(t);
+					k++;
+					tripulants.add(t);
+				}
+			}
+			
+			vaixells.get(i).setTripulacio(tripulants);
+			
+			e.persist(vaixells.get(i));
 			i++;
 		}
 		
+		e.getTransaction().commit();
 		e.close();
 
 	}

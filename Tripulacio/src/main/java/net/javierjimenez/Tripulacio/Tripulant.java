@@ -10,9 +10,8 @@ public class Tripulant implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
 	@Column(name = "DNI")
-	private int dni;
+	private Integer dni;
 	
 	@Column(name= "Nom")
 	private String nom;
@@ -21,7 +20,7 @@ public class Tripulant implements Serializable {
 	private String rang;
 	
 	@Column(name = "id_vaixell")
-	private int id_vaixell;
+	private Integer id_vaixell;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -29,11 +28,11 @@ public class Tripulant implements Serializable {
 		super();
 	}
 
-	public int getDni() {
+	public Integer getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(Integer dni) {
 		this.dni = dni;
 	}
 
@@ -53,11 +52,17 @@ public class Tripulant implements Serializable {
 		this.rang = rang;
 	}
 
-	public int getId_vaixell() {
+	public Integer getId_vaixell() {
 		return id_vaixell;
 	}
 
-	public void setId_vaixell(int id_vaixell) {
+	public void setId_vaixell(Integer id_vaixell) {
 		this.id_vaixell = id_vaixell;
+	}
+
+	@Override
+	public String toString() {
+		return "Tripulant [getDni()=" + getDni() + ", getNom()=" + getNom() + ", getRang()=" + getRang()
+				+ ", getId_vaixell()=" + getId_vaixell() + "]";
 	}
 }

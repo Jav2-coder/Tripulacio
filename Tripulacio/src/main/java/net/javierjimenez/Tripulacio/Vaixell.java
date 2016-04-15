@@ -10,8 +10,9 @@ import javax.persistence.*;
 public class Vaixell implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "Matrícula")
-	private int matricula;
+	private Integer matricula;
 	
 	@Column(name = "Nom")
 	private String nom;
@@ -26,11 +27,11 @@ public class Vaixell implements Serializable {
 		super();
 	}
 	
-	public int getMatricula() {
+	public Integer getMatricula() {
 		return matricula;
 	}
 
-	public void setMatricula(int matricula) {
+	public void setMatricula(Integer matricula) {
 		this.matricula = matricula;
 	}
 
@@ -48,5 +49,11 @@ public class Vaixell implements Serializable {
 
 	public void setTripulacio(List<Tripulant> tripulacio) {
 		this.tripulacio = tripulacio;
+	}
+	
+	@Override
+	public String toString() {
+		return "Vaixell [getMatricula()=" + getMatricula() + ", getNom()=" + getNom() + ", getTripulacio()="
+				+ getTripulacio() + "]";
 	}
 }
