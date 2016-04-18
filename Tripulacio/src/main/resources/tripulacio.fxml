@@ -18,43 +18,47 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="292.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="315.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="157.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ListView fx:id="tripulacio" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="275.0" style="-fx-border-color: black;" GridPane.columnIndex="1">
+            <ListView fx:id="tripulacio" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="275.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="-20.0" left="12.0" />
                </GridPane.margin>
             </ListView>
-            <Label text="Tripulació:" GridPane.columnIndex="1">
+            <Label text="Tripulació:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="12.0" top="-254.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="navegar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="181.0" style="-fx-border-color: black; -fx-background-color: white;" text=" " GridPane.rowIndex="1">
+            <Label fx:id="navegar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="181.0" style="-fx-border-color: black; -fx-background-color: white;" text=" " GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="108.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Pot navegar?" GridPane.rowIndex="1">
+            <Label text="Pot navegar?" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="13.0" />
                </GridPane.margin>
             </Label>
-            <ComboBox fx:id="llistaVaixells" onAction="#seleccionarVaixell" prefHeight="31.0" prefWidth="275.0" promptText="Llista de Vaixells">
+            <ComboBox fx:id="llistaVaixells" onAction="#seleccionarVaixell" prefHeight="31.0" prefWidth="275.0" promptText="Llista de Vaixells" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="13.0" top="-185.0" />
                </GridPane.margin>
             </ComboBox>
+            <Button fx:id="crearVaixellsRandom" mnemonicParsing="false" onAction="#generarVaixellsRandom" prefHeight="45.0" prefWidth="195.0" text="Generar vaixells [Aleatori]">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="crearVaixellsArxiu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#generarVaixellsArxiu" prefHeight="45.0" prefWidth="195.0" text="Generar vaixells [Arxiu]" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
    </left>
-   <top>
-      <Button fx:id="crearVaixells" mnemonicParsing="false" onAction="#generarVaixells" prefHeight="45.0" prefWidth="168.0" text="Generar vaixells" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="15.0" />
-         </BorderPane.margin>
-      </Button>
-   </top>
 </BorderPane>

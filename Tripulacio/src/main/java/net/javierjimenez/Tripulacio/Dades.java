@@ -1,5 +1,6 @@
 package net.javierjimenez.Tripulacio;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -8,6 +9,12 @@ import javafx.collections.ObservableList;
 
 public class Dades {
 
+	private static final int MIN = 10000000;
+
+	private static final int MAX = 99999999;
+	
+	private int id;
+	
 	Random rnd = new Random();
 
 	String[] rang = { "capita", "tripulant", "cap de colla" };
@@ -16,34 +23,51 @@ public class Dades {
 
 	}
 
-	public void persistirTripulant(Tripulant t, Integer id) {
+	public List<Vaixell> generarVaixells() {
+		
+		List<Vaixell> llista = new ArrayList<Vaixell>();
+		
+		int j = 0;
 
-		int j = rnd.nextInt(10000);
+		while (j < 100) {
 
-		t.setDni(j);
-		t.setNom("Nom " + j);
-		t.setId_vaixell(id);
+			Vaixell v = new Vaixell();
+			llista.add(v);
+			j++;
+		}
+		
+		return llista;
+
+	}
+
+	public void persistirTripulant(Tripulant t, Integer matricula) {
+
+		id = rnd.nextInt(MAX - MIN) + MIN;
+
+		t.setDni(id);
+		t.setNom("Nom " + id);
+		t.setId_vaixell(matricula);
 		t.setRang(rang[rnd.nextInt(rang.length)]);
 
 	}
 
 	public void persistirVaixell(Vaixell v) {
 
-		int j = rnd.nextInt(10000);
+		id = rnd.nextInt(MAX - MIN) + MIN;
 
-		v.setMatricula(j);
-		v.setNom("Nom " + j);
+		v.setMatricula(id);
+		v.setNom("Nom " + id);
 
 	}
-	
-	public ObservableList<String> emplenarLlista(List<Vaixell> vaixells){
-		
-		ObservableList<String> llista_vaixells = FXCollections.observableArrayList();
 
-		for (Vaixell v : vaixells){
-			llista_vaixells.add(v.getNom());
+	public ObservableList<String> emplenarLlista(List<Tripulant> tripulacio) {
+
+		ObservableList<String> llista_tripulacio = FXCollections.observableArrayList();
+
+		for (Tripulant t : tripulacio) {
+			llista_tripulacio.add(t.getNom() + " - " + t.getRang());
 		}
-		
-		return llista_vaixells;
+
+		return llista_tripulacio;
 	}
 }
