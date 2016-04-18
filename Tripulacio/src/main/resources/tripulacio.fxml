@@ -51,7 +51,7 @@
       </GridPane>
    </left>
    <top>
-      <Button mnemonicParsing="false" onAction="#generarVaixells" prefHeight="45.0" prefWidth="168.0" text="Generar vaixells" BorderPane.alignment="CENTER">
+      <Button fx:id="crearVaixells" mnemonicParsing="false" onAction="#generarVaixells" prefHeight="45.0" prefWidth="168.0" text="Generar vaixells" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="15.0" />
          </BorderPane.margin>
