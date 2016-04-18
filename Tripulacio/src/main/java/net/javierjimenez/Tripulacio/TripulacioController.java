@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -55,7 +56,7 @@ public class TripulacioController implements Initializable {
 	private Dades d = new Dades();
 
 	private int rndTripulacio;
-
+	
 	private List<String> dades = new ArrayList<String>();
 
 	@Override
@@ -85,9 +86,13 @@ public class TripulacioController implements Initializable {
 
 		while (linia != null) {
 
-			dades.add(linia);
-
-			linia = br.readLine();
+			if (Pattern.matches(".+,\t.{,8},\t.+\b", linia)) {
+				dades.add(linia);
+				linia = br.readLine();
+			} else {
+				linia = br.readLine();
+				System.out.println("La linia no coincideix amb les especificacions desitjades.");
+			}
 		}
 
 		br.close();
