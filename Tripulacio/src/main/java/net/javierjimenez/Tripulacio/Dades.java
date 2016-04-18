@@ -1,6 +1,10 @@
 package net.javierjimenez.Tripulacio;
 
+import java.util.List;
 import java.util.Random;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Dades {
 
@@ -30,5 +34,16 @@ public class Dades {
 		v.setMatricula(j);
 		v.setNom("Nom " + j);
 
+	}
+	
+	public ObservableList<String> emplenarLlista(List<Vaixell> vaixells){
+		
+		ObservableList<String> llista_vaixells = FXCollections.observableArrayList();
+
+		for (Vaixell v : vaixells){
+			llista_vaixells.add(v.getNom());
+		}
+		
+		return llista_vaixells;
 	}
 }

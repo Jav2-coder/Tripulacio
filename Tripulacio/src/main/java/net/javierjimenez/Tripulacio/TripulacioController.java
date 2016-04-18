@@ -10,8 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,6 +43,8 @@ public class TripulacioController implements Initializable {
 	private static final int MAX_TRIPULACIO = 10;
 
 	private Random rnd = new Random();
+	
+	private Dades d = new Dades();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -55,8 +55,6 @@ public class TripulacioController implements Initializable {
 	}
 
 	public void generarVaixells(ActionEvent event) {
-
-		Dades d = new Dades();
 
 		e.getTransaction().begin();
 
@@ -103,8 +101,9 @@ public class TripulacioController implements Initializable {
 		e.getTransaction().commit();
 		e.close();
 		
-		vaixells.clear();
 		tripulants.clear();
+		
+		tripulacio.setItems(d.emplenarLlista(vaixells));
 		
 		crearVaixells.setDisable(true);
 
@@ -112,16 +111,7 @@ public class TripulacioController implements Initializable {
 
 	public void seleccionarVaixell(ActionEvent event) {
 
-		ObservableList<String> prueba = FXCollections.observableArrayList();
-
-		int i = 0;
-
-		while (i < 100) {
-			i++;
-			prueba.add("Prueba");
-		}
-
-		tripulacio.setItems(prueba);
+		
 
 	}
 }
