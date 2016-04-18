@@ -12,9 +12,9 @@ public class Dades {
 	private static final int MIN = 10000000;
 
 	private static final int MAX = 99999999;
-	
+
 	private int id;
-	
+
 	Random rnd = new Random();
 
 	String[] rang = { "capita", "tripulant", "cap de colla" };
@@ -24,9 +24,9 @@ public class Dades {
 	}
 
 	public List<Vaixell> generarVaixells() {
-		
+
 		List<Vaixell> llista = new ArrayList<Vaixell>();
-		
+
 		int j = 0;
 
 		while (j < 100) {
@@ -35,7 +35,7 @@ public class Dades {
 			llista.add(v);
 			j++;
 		}
-		
+
 		return llista;
 
 	}
@@ -64,10 +64,28 @@ public class Dades {
 
 		ObservableList<String> llista_tripulacio = FXCollections.observableArrayList();
 
-		for (Tripulant t : tripulacio) {
-			llista_tripulacio.add(t.getNom() + " - " + t.getRang());
-		}
+		if (tripulacio.isEmpty()) {
 
-		return llista_tripulacio;
+			llista_tripulacio.add("Sense tripulació");
+			
+			return llista_tripulacio;
+			
+		} else {
+
+			for (Tripulant t : tripulacio) {
+				llista_tripulacio.add(t.getNom() + " - " + t.getRang());
+			}
+
+			return llista_tripulacio;
+		}
 	}
+	
+    public boolean isNumeric(String cadena){
+    	try {
+    		Integer.parseInt(cadena);
+    		return true;
+    	} catch (NumberFormatException nfe){
+    		return false;
+    	}
+    }
 }
