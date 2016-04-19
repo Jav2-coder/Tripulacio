@@ -7,8 +7,8 @@
     <class>net.javierjimenez.Tripulacio.Tripulant</class>
 
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tripulacio" />
-      <!-- <property name="javax.persistence.jdbc.url" value="jdbc:mysql://172.17.0.3/tripulacio" /> -->
+      <!-- <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tripulacio" /> -->
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://172.17.0.2/tripulacio" />
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
       <property name="javax.persistence.jdbc.user" value="surrui" />
       <property name="javax.persistence.jdbc.password" value="AlumneDaw2" />

@@ -86,7 +86,7 @@ public class TripulacioController implements Initializable {
 
 		while (linia != null) {
 
-			if (Pattern.matches(".+,\t.{,8},\t.+\b", linia)) {
+			if (Pattern.matches("([a-z\\s]+), (\\d{1,8}), (.+)", linia)) {
 				dades.add(linia);
 				linia = br.readLine();
 			} else {
@@ -231,7 +231,7 @@ public class TripulacioController implements Initializable {
 			} else if (tripulacioVaixell.get(i).getRang().equals("cap de colla")) {
 				cap_colla++;
 			}
-
+			
 			if (tripulacioVaixell.get(i).getRang().equals("tripulant"))
 				tripulant = true;
 		}
