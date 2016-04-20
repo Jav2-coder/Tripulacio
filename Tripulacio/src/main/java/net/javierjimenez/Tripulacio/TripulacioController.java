@@ -26,39 +26,103 @@ import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+/**
+ * 
+ * @author Surrui
+ *
+ */
 public class TripulacioController implements Initializable {
 
+	/**
+	 * Objecte ListView que conte la llista de tripulants de cada Vaixell.
+	 */
 	@FXML
 	private ListView<String> tripulacio = new ListView<String>();
+	
+	/**
+	 * Objecte Label que informa si el Vaixell pot navegar o no.
+	 */
 	@FXML
 	private Label navegar;
+	
+	/**
+	 * Objecte Button que genera els Vaixells i la seva
+	 * tripulacio de forma aleatoria.
+	 */
 	@FXML
 	private Button crearVaixellsRandom;
+	
+	/**
+	 * Objecte Button que genera els Vaixells i la seva
+	 * tripulacio a partir d'un arxiu txt.
+	 */
 	@FXML
 	private Button crearVaixellsArxiu;
+	
+	/**
+	 * Objecte ComboBox que conte els noms dels Vaixells generats.
+	 */
 	@FXML
 	private ComboBox<String> llistaVaixells = new ComboBox<>();
 
+	/**
+	 * Objecte EntityManager encarregat de persistir les dades a la base de dades.
+	 */
 	private EntityManager e;
 
-	EntityManagerFactory emf;
+	/**
+	 * Objecte EntityManagerFactory encarregat de generar la base de dades.
+	 */
+	private EntityManagerFactory emf;
 
-	List<Vaixell> vaixells = new ArrayList<Vaixell>();
+	/**
+	 * Objecte List que conte objectes Vaixell
+	 */
+	private List<Vaixell> vaixells = new ArrayList<Vaixell>();
 
-	List<Tripulant> tripulants;
+	/**
+	 * Objecte List que conte objectes Tripulant.
+	 */
+	private List<Tripulant> tripulants;
 
+	/**
+	 * Variable int que indica el minim d'objectes Tripulant
+	 * que contindra cada objecte Vaixell
+	 */
 	private static final int MIN_TRIPULACIO = 3;
 
+	/**
+	 * Variable int que indica el maxim d'objectes Tripulant
+	 * que contindra cada objecte Vaixell
+	 */
 	private static final int MAX_TRIPULACIO = 10;
 
+	/**
+	 * Objecte Random que farem servir per generar valors aleatoris.
+	 */
 	private Random rnd = new Random();
 
+	/**
+	 * Objecte Dades que farem servir per generar els valors
+	 * dels atributs dels objectes Tripulant i Vaixell
+	 */
 	private Dades d = new Dades();
 
+	/**
+	 * Variable int que conte el total de Tripulant que
+	 * contindran cada Vaixell en la BD.
+	 */
 	private int rndTripulacio;
 	
+	/**
+	 * Objecte List que conte les dades de cada Tripulant
+	 * que s'agafaran de l'arxiu TXT
+	 */
 	private List<String> dades = new ArrayList<String>();
 
+	/**
+	 * Metode que inicialitza la connexio amb la Base de Dades.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -67,6 +131,13 @@ public class TripulacioController implements Initializable {
 
 	}
 
+	/**
+	 * Metode per generar els objectes Vaixell i Tripulant
+	 * a partir d'un arxiu TXT que escollim nosaltres.
+	 * 
+	 * @param event Objecte ActionEvent
+	 * @throws IOException
+	 */
 	public void generarVaixellsArxiu(ActionEvent event) throws IOException {
 
 		e.getTransaction().begin();
@@ -154,6 +225,11 @@ public class TripulacioController implements Initializable {
 
 	}
 
+	/**
+	 * Metode per generar els objectes Vaixell i Tripulant aleatoriament.
+	 * 
+	 * @param event Objecte ActionEvent
+	 */
 	public void generarVaixellsRandom(ActionEvent event) {
 
 		e.getTransaction().begin();
@@ -201,6 +277,13 @@ public class TripulacioController implements Initializable {
 
 	}
 
+	/**
+	 * Metode encarregat de buscar en la BD els objectes Tripulant
+	 * i retornar els que estan lligats al objecte Vaixell que hem
+	 * seleccionat del ComboBox.
+	 * 
+	 * @param event Objecte ActionEvent
+	 */
 	public void seleccionarVaixell(ActionEvent event) {
 
 		e = emf.createEntityManager();

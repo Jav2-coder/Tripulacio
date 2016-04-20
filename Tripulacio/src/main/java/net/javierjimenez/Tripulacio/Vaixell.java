@@ -23,7 +23,7 @@ public class Vaixell implements Serializable {
 	private Integer matricula;
 	
 	/**
-	 * variable String que conte el nom de l'objecte Vaixell.
+	 * Variable String que conte el nom de l'objecte Vaixell.
 	 */
 	@Column(name = "Nom")
 	private String nom;
@@ -96,14 +96,5 @@ public class Vaixell implements Serializable {
 	 */
 	public void setTripulacio(List<Tripulant> tripulacio) {
 		this.tripulacio = tripulacio;
-	}
-	
-	/**
-	 * 
-	 */
-	@Override
-	public String toString() {
-		return "Vaixell [getMatricula()=" + getMatricula() + ", getNom()=" + getNom() + ", getTripulacio()="
-				+ getTripulacio() + "]";
 	}
 }
